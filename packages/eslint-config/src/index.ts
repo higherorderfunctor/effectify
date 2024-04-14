@@ -16,7 +16,7 @@ import EslintPluginPromise from "eslint-plugin-promise";
 import EslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import EslintPluginSortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 import JsoncEslintParser from "jsonc-eslint-parser";
-import path from "path";
+import path from "path:node";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
