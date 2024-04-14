@@ -2,6 +2,7 @@
   "extends": "./tsconfig.base.json",
   "include": [],
   "references": [
+    { "path": "packages/eslint-conifg" },
     { "path": "packages/tree-sitter" },
     { "path": "packages/tree-sitter-cassandraql" }
   ]

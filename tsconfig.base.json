@@ -37,12 +37,20 @@
     "removeComments": false,
     "plugins": [{ "name": "@effect/language-service" }],
     "paths": {
+      "@effectify/eslint-config": ["./packages/eslint-config/src/index.js"],
+      "@effectify/eslint-config/*": ["./packages/eslint-config/src/*.js"],
       "@effectify/tree-sitter": ["./packages/tree-sitter/src/index.js"],
       "@effectify/tree-sitter/*": ["./packages/tree-sitter/src/*.js"],
       "@effectify/tree-sitter/test/*": ["./packages/tree-sitter/test/*.js"],
-      "@effectify/tree-sitter-cassandraql": ["./packages/tree-sitter-cassandraql/src/index.js"],
-      "@effectify/tree-sitter-cassandraql/*": ["./packages/tree-sitter-cassandraql/src/*.js"],
-      "@effectify/tree-sitter-cassandraql/test/*": ["./packages/tree-sitter-cassandraql/test/*.js"]
+      "@effectify/tree-sitter-cassandraql": [
+        "./packages/tree-sitter-cassandraql/src/index.js"
+      ],
+      "@effectify/tree-sitter-cassandraql/*": [
+        "./packages/tree-sitter-cassandraql/src/*.js"
+      ],
+      "@effectify/tree-sitter-cassandraql/test/*": [
+        "./packages/tree-sitter-cassandraql/test/*.js"
+      ]
     }
   }
 }
