@@ -1,0 +1,1 @@
+# @effectify/eslint-config

@@ -1,20 +1,23 @@
-
 {
-  "name": "@effectify/tree-sitter",
+  "name": "@effectify/eslint-config",
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
-  "description": "Effectified tree-sitter grammar library",
+  "description": "ESlint configuration for effectify",
   "homepage": "https://github.com/higherorderfunctor/effectify#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/higherorderfunctor/effectify.git",
-    "directory": "packages/tree-sitter"
+    "directory": "packages/eslint-config"
   },
   "bugs": {
     "url": "https://github.com/higherorderfunctor/effectify/issues"
   },
   "scripts": {
+    "codegen": "build-utils prepare-v2",
+    "build-esm": "tsc -b tsconfig.build.json",
+    "build": "pnpm codegen && pnpm build-esm && pnpm build-cjs && pnpm build-annotate && build-utils pack-v2",
+    "build-orig": "pnpm codegen && pnpm build-esm && pnpm build-cjs && pnpm build-annotate && build-utils pack-v2"
   },
   "dependencies": {
   },
