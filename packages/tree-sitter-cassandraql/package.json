@@ -1,0 +1,44 @@
+{
+  "name": "@effectify/tree-sitter-cassandraql",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Tree-sitter grammar for Cassandra CQL language",
+  "homepage": "https://github.com/higherorderfunctor/effectify#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/higherorderfunctor/effectify.git",
+    "directory": "packages/tree-sitter-cassandraql"
+  },
+  "bugs": {
+    "url": "https://github.com/higherorderfunctor/effectify/issues"
+  },
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.cql",
+      "file-types": [
+        "cql"
+      ]
+    }
+  ],
+  "effect": {
+    "generateExports": {
+      "include": [
+        "**/*.ts"
+      ]
+    },
+    "generateIndex": {
+      "include": [
+        "**/*.ts"
+      ]
+    }
+  }
+}

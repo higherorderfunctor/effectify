@@ -1,0 +1,36 @@
+{
+  "name": "@effectify/tree-sitter",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Effectified tree-sitter grammar library",
+  "homepage": "https://github.com/higherorderfunctor/effectify#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/higherorderfunctor/effectify.git",
+    "directory": "packages/tree-sitter"
+  },
+  "bugs": {
+    "url": "https://github.com/higherorderfunctor/effectify/issues"
+  },
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+  },
+  "effect": {
+    "generateExports": {
+      "include": [
+        "**/*.ts"
+      ]
+    },
+    "generateIndex": {
+      "include": [
+        "**/*.ts"
+      ]
+    }
+  }
+}
