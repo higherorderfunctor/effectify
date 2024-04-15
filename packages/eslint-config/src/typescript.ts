@@ -17,14 +17,9 @@ import { Linter } from 'eslint'
 // import EslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 // import * as EslintPluginSortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 // import JsoncEslintParser from "jsonc-eslint-parser";
-import * as path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const jsFiles = ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs']
-const tsFiles = ['**/*.ts', '**/*.jsx']
+const jsFiles = ['**/*.{js,jsx,cjs,mjs}']
+const tsFiles = ['**/*.{ts,tsx,cts,mts}']
 // const jsonFiles = ["**/*.json", "**/*.json5", "**/*.jsonc"];
 
 const ignores: string[] = []
@@ -38,14 +33,10 @@ const common: Linter.FlatConfig = {
   languageOptions: {
     parser: TypescriptEslintParser,
     parserOptions: {
-      project: ['[tj]sconfig.json', 'packages/*/[tj]sconfig.json'],
+      project: ['[tj]sconfig.*.json', 'packages/*/[tj]sconfig.*.json'],
       ecmaVersion: 'latest',
       sourceType: 'module',
-      tsconfigRootDir: __dirname,
-    },
-    globals: {
-      // add declared globals here so eslint doesn't throw errors
-    },
+    }
   },
   settings: {
     'import/parsers': {
@@ -55,7 +46,7 @@ const common: Linter.FlatConfig = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
-        project: ['[tj]sconfig.json', 'packages/*/[tj]sconfig.json'],
+        project: ['[tj]sconfig.*.json', 'packages/*/[tj]sconfig.*.json'],
       },
       node: true,
     },

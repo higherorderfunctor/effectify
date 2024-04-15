@@ -5,7 +5,24 @@
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "codegen": "pnpm --recursive --parallel run codegen",
+    "build": "tsc -b tsconfig.build.json && pnpm --recursive --parallel run build",
+    "circular": "madge --extensions ts --circular --no-color --no-spinner packages/*/src",
+    "test": "vitest",
+    "coverage": "vitest --coverage",
+    "check": "tsc -b tsconfig.json",
+    "check-recursive": "pnpm --recursive exec tsc -b tsconfig.json",
+    "lint": "pnpm lint-build && eslint",
+    "lint-fix": "pnpm lint --fix",
+    "lint-build": "bun eslint.build.ts",
+    "docgen": "pnpm --recursive --parallel exec docgen && node scripts/docs.mjs",
+    "dtslint": "pnpm --recursive --parallel run dtslint",
+    "dtslint-clean": "dtslint --installAll",
+    "changeset-version": "changeset version && node scripts/version.mjs",
+    "changeset-publish": "pnpm build && changeset publish"
+  },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.3",
@@ -18,6 +35,8 @@
     "@effect/dtslint": "^0.0.5",
     "@effect/eslint-plugin": "^0.1.2",
     "@effect/language-service": "^0.1.0",
+    "@effectify/eslint-config": "workspace:*",
+    "@types/bun": "^1.0.12",
     "@types/node": "^20.11.30",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",

@@ -1,4 +1,19 @@
-import EslintConfig from './packages/eslint-config/dist/dist/esm/typescript.js'
+import eslintConfig from '@effectify/eslint-config/typescript'
 
+const ignores = ['eslint.config.js', 'packages/*/{build,dist}/**/*']
 
-export default EslintConfig;
+const tsEslintConfig = eslintConfig.map((config) => ({
+  ...config,
+  ignores,
+  languageOptions: {
+    ...config.languageOptions,
+    parserOptions: {
+      ...(config.languageOptions?.parserOptions ?? {}),
+      tsconfigRootDir: __dirname,
+    }
+  }
+}))
+
+export default [
+  ...tsEslintConfig
+]

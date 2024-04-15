@@ -1,10 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": [],
-  "references": [{ "path": "tsconfig.src.json" }],
-
-  "compilerOptions": {
-    "types": ["node"],
-    "typeRoots": ["./vendor/types", "./node_modules/@types"]
-  }
+  "references": [{ "path": "tsconfig.src.json" }]
 }

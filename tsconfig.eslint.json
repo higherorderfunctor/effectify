@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": ["eslint.*.ts"],
+  "references": [{ "path": "packages/eslint-config" }],
+  "compilerOptions": {
+    "tsBuildInfoFile": ".tsbuildinfo/eslint.tsbuildinfo",
+    "types": ["bun"],
+    "noEmit": true
+  }
+}
