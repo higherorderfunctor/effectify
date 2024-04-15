@@ -1,13 +1,13 @@
-// import { FlatCompat } from "@eslint/eslintrc";
+import { FlatCompat } from "@eslint/eslintrc";
 import js from '@eslint/js'
-// import EslintPluginStylistic from '@stylistic/eslint-plugin'
+import EslintPluginStylistic from '@stylistic/eslint-plugin'
 import TypescriptEslintParser from '@typescript-eslint/parser'
 import { Linter } from 'eslint'
 // import EslintPluginCodegen, {
 //   processors as EslintPluginCodegenProcessors,
 // } from "eslint-plugin-codegen";
 // import EslintPluginDeprecation from "eslint-plugin-deprecation";
-// import * as EslintPluginImport from "eslint-plugin-import";
+import * as EslintPluginImport from "eslint-plugin-import";
 // import EslintPluginJsonc from "eslint-plugin-jsonc";
 // import EslintPluginMarkdown from "eslint-plugin-markdown";
 // import * as EslintPluginPreferArrowFunctions from "eslint-plugin-prefer-arrow-functions";
@@ -18,17 +18,99 @@ import { Linter } from 'eslint'
 // import * as EslintPluginSortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 // import JsoncEslintParser from "jsonc-eslint-parser";
 
+//   "devDependencies": {
+//     "@eslint-types/import": "^2.29.1",
+//     "@eslint/eslintrc": "^3.0.2",
+//     "@stylistic/eslint-plugin": "^1.7.0",
+//     "@types/bun": "^1.0.12",
+//     "@types/eslint-plugin-markdown": "^2.0.2",
+//     "@types/eslint__eslintrc": "^2.1.1",
+//     "@types/node": "^20.12.7",
+//     "effect": "^2.4.18",
+//     "eslint-config-airbnb-typescript": "^18.0.0",
+//     "eslint-config-prettier": "^9.1.0",
+//     "eslint-plugin-codegen": "^0.28.0",
+//     "eslint-plugin-deprecation": "^2.0.0",
+//     "eslint-plugin-import": "^2.29.1",
+//     "eslint-plugin-jsonc": "^2.15.1",
+//     "eslint-plugin-markdown": "^4.0.1",
+//     "eslint-plugin-prefer-arrow-functions": "^3.3.2",
+//     "eslint-plugin-prettier": "^5.1.3",
+//     "eslint-plugin-promise": "^6.1.1",
+//     "eslint-plugin-simple-import-sort": "^12.1.0",
+//     "eslint-plugin-sort-destructure-keys": "^1.5.0",
+//     "jsonc-eslint-parser": "^2.4.0"
+//   },
+//   "peerDependencies": {
+//     "@eslint/eslintrc": "^3.0.2",
+//     "@stylistic/eslint-plugin": "^1.7.0",
+//     "@typescript-eslint/parser": "^7.6.0",
+//     "eslint-plugin-codegen": "^0.28.0",
+//     "eslint-plugin-deprecation": "^2.0.0",
+//     "eslint-plugin-import": "^2.29.1",
+//     "eslint-plugin-jsonc": "^2.15.1",
+//     "eslint-plugin-markdown": "^4.0.1",
+//     "eslint-plugin-prefer-arrow-functions": "^3.3.2",
+//     "eslint-plugin-prettier": "^5.1.3",
+//     "eslint-plugin-promise": "^6.1.1",
+//     "eslint-plugin-simple-import-sort": "^12.1.0",
+//     "eslint-plugin-sort-destructure-keys": "^1.5.0",
+//     "jsonc-eslint-parser": "^2.4.0"
+//   },
+
+
+  // "scripts": {
+  //   "clean": "node scripts/clean.mjs",
+  //   "codegen": "pnpm --recursive --parallel run codegen",
+  //   "circular": "madge --extensions ts --circular --no-color --no-spinner packages/*/src",
+  //   "test": "vitest",
+  //   "coverage": "vitest --coverage",
+  //   "check": "tsc -b tsconfig.json",
+  //   "check-recursive": "pnpm --recursive exec tsc -b tsconfig.json",
+  //   "docgen": "pnpm --recursive --parallel exec docgen && node scripts/docs.mjs",
+  //   "dtslint": "pnpm --recursive --parallel run dtslint",
+  //   "dtslint-clean": "dtslint --installAll",
+  //   "changeset-version": "changeset version && node scripts/version.mjs",
+  //   "changeset-publish": "pnpm build && changeset publish"
+  // },
+  // "devDependencies": {
+  //   "@babel/core": "^7.24.3",
+  //   "@changesets/changelog-github": "^0.5.0",
+  //   "@changesets/cli": "^2.27.1",
+  //   "@effect/docgen": "^0.3.8",
+  //   "@effect/dtslint": "^0.0.5",
+  //   "@effect/eslint-plugin": "^0.1.2",
+  //   "@effect/language-service": "^0.1.0",
+  //   "@typescript-eslint/eslint-plugin": "^7.3.1",
+  //   "esbuild": "^0.20.2",
+  //   "eslint-import-resolver-typescript": "^3.6.1",
+  //   "eslint-plugin-codegen": "^0.27.0",
+  //   "eslint-plugin-deprecation": "^2.0.0",
+  //   "eslint-plugin-import": "^2.29.1",
+  //   "eslint-plugin-simple-import-sort": "^12.0.0",
+  //   "eslint-plugin-sort-destructure-keys": "^1.5.0",
+  //   "fast-check": "^3.16.0",
+  //   "glob": "^10.3.10",
+  //   "madge": "^6.1.0",
+  //   "playwright": "^1.42.1",
+  //   "prettier": "^3.2.5",
+  //   "rimraf": "^5.0.5",
+  //   "tsx": "^4.7.1",
+  //   "vite": "^5.2.2",
+  //   "vitest": "^1.4.0"
+  // }
+
+
 const jsFiles = ['**/*.{js,jsx,cjs,mjs}']
 const tsFiles = ['**/*.{ts,tsx,cts,mts}']
 // const jsonFiles = ["**/*.json", "**/*.json5", "**/*.jsonc"];
 
-const ignores: string[] = []
-// const compat = new FlatCompat({
-//   baseDirectory: __dirname,
-// });
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
 
 const common: Linter.FlatConfig = {
-  ignores,
+  ignores: [],
   files: [...jsFiles, ...tsFiles],
   languageOptions: {
     parser: TypescriptEslintParser,
@@ -53,20 +135,34 @@ const common: Linter.FlatConfig = {
   },
 }
 
-const eslintRecommended: Linter.FlatConfig[] = [
+const eslintRecommended =
   {
     ...js.configs.recommended,
     ...common,
-  },
-]
+  };
 
+const eslintPluginStylistic ={
+    ...EslintPluginStylistic.configs['recommended-flat'],
+    ...common,
+  }
+
+// console.log(compat
+//   .extends("eslint-config-airbnb-base"))
+//
 // const airbnbBase = compat
 //   .extends("eslint-config-airbnb-base")
 //   .map((config) => ({
 //     ...config,
 //     ...common,
+//   // rules: Object.fromEntries(Object.keys(
+//   //   config.rules ?? {}).map((name) => {
+//   //     const rule: Linter.RuleEntry = (config.rules as Partial<Linter.RulesRecord>)[name] as Linter.RuleEntry;
+//   //     rule.
+//   //     return [name, rule]
+//   //   }
+//   // )) as Partial<Linter.RulesRecord>
 //   }));
-//
+
 // const airbnbWhitespace = compat
 //   .extends("eslint-config-airbnb-base/whitespace")
 //   .map((config) => ({
@@ -123,16 +219,16 @@ const eslintRecommended: Linter.FlatConfig[] = [
 //   ignores,
 // }];
 //
-// const eslintPlugImport = [
-//   ...[
-//     EslintPluginImport.configs.recommended,
-//     EslintPluginImport.configs.typescript,
-//   ].map((config) => ({
-//     ...config,
-//     ...common,
-//   })),
-// ];
-//
+const eslintPlugImport = [
+  ...[
+    ...compat.config(EslintPluginImport.configs.recommended),
+    ...compat.config(EslintPluginImport.configs.typescript),
+  ].map((config) => ({
+    ...config,
+    ...common,
+  })),
+];
+
 // const eslintPlugPromise = [{
 //   ...EslintPluginPromise.configs.recommended,
 //   ...common,
@@ -184,23 +280,14 @@ const eslintRecommended: Linter.FlatConfig[] = [
 //   },
 // ];
 
-// const eslintPluginStylistic = [
-//   {
-//     ...EslintPluginStylistic.configs['recommended-flat'],
-//     plugins: {
-//       '@stylistic': EslintPluginStylistic,
-//     },
-//     ...common,
-//   },
-// ]
 
 const eslintConfig: Linter.FlatConfig[] = [
-  ...eslintRecommended,
-  // ...eslintPluginStylistic,
+  eslintRecommended,
+  eslintPluginStylistic,
   /// / ...eslintPluginJsonc,
   /// / ...eslintPluginMarkdown,
   /// / ...eslintPuginCodegen,
-  // ...airbnbBase,
+  // airbnbBase,
   // ...airbnbWhitespace,
   // ...airbnbTypescriptBase,
   // ...typescriptEslintStrictTypeChecked,
@@ -208,7 +295,7 @@ const eslintConfig: Linter.FlatConfig[] = [
   /// / ...eslintPluginTypescript,
   // ...eslintPluginPrettier,
   // ...eslintPluginPrettierJson,
-  // ...eslintPlugImport,
+  ...eslintPlugImport,
   // ...eslintPlugPromise,
   // {
   //  ...common,

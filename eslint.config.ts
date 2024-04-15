@@ -1,4 +1,4 @@
-import eslintConfig from '@effectify/eslint-config/typescript'
+import eslintConfig from './packages/eslint-config/src/typescript.js'
 
 const ignores = ['eslint.config.js', 'packages/*/{build,dist}/**/*']
 
