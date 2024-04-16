@@ -1,27 +1,27 @@
-
 declare module 'eslint-plugin-promise' {
-  import { Linter, Rule } from 'eslint';
-  export const rules: {
-     'param-names': Rule,
-     'no-return-wrap': Rule,
-     'always-return': Rule,
-     'catch-or-return': Rule,
-     'prefer-await-to-callbacks': Rule,
-     'prefer-await-to-then': Rule,
-     'no-native': Rule,
-     'no-callback-in-promise': Rule,
-     'no-promise-in-callback': Rule,
-     'no-nesting': Rule,
-     'avoid-new': Rule,
-     'no-new-statics': Rule,
-     'no-return-in-finally': Rule,
-     'valid-params': Rule,
-     'no-multiple-resolved': Rule,
-   },
+  import { Linter, Rule } from 'eslint'
 
-    export const configs: {
-        'recommended': Linter.FlatConfig;
-    };
+  export const rules: {
+    'param-names': Rule
+    'no-return-wrap': Rule
+    'always-return': Rule
+    'catch-or-return': Rule
+    'prefer-await-to-callbacks': Rule
+    'prefer-await-to-then': Rule
+    'no-native': Rule
+    'no-callback-in-promise': Rule
+    'no-promise-in-callback': Rule
+    'no-nesting': Rule
+    'avoid-new': Rule
+    'no-new-statics': Rule
+    'no-return-in-finally': Rule
+    'valid-params': Rule
+    'no-multiple-resolved': Rule
+  },
+
+  export const configs: {
+    recommended: Linter.FlatConfig
+  }
 }
 // module.exports = {
 //   rules: {

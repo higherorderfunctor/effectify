@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "clean": "rimraf -g ./packages/*/{build,dist} **/.tsbuildinfo",
     "build": "tsc -b tsconfig.build.json && pnpm --recursive --parallel run build",
     "lint": "pnpm lint-build && eslint",
     "lint-fix": "pnpm lint --fix",
@@ -19,14 +20,23 @@
     "@effectify/eslint-config": "workspace:*",
     "@eslint/eslintrc": "^3.0.2",
     "@eslint/js": "^9.0.0",
-    "@stylistic/eslint-plugin": "^1.7.0",
+    "@stylistic/eslint-plugin": "^1.7.2",
     "@types/bun": "^1.0.12",
     "@types/node": "^20.12.7",
-    "@typescript-eslint/parser": "^7.6.0",
+    "@typescript-eslint/parser": "^7.7.0",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "eslint": "^9.0.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
+    "rimraf": "^5.0.5",
     "typescript": "^5.4.5"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint-plugin-import@2.29.1": "patches/eslint-plugin-import@2.29.1.patch",
+      "eslint-config-airbnb-base@15.0.0": "patches/eslint-config-airbnb-base@15.0.0.patch"
+    }
   }
 }

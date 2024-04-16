@@ -1,11 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src"],
+  "include": ["src", "../../vendor/types"],
   "references": [],
   "compilerOptions": {
     "tsBuildInfoFile": ".tsbuildinfo/src.tsbuildinfo",
     "rootDir": "src",
     "outDir": "build/src",
-    "types": ["bun"]
+    "types": ["bun"],
+    "typeRoots": [
+      "../../vendor/types/",
+      "node_modules/@types",
+      "../../node_modules/@types"
+    ]
   }
 }

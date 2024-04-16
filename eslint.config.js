@@ -2,14 +2,10 @@
 import {FlatCompat} from "@eslint/eslintrc";
 import js2 from "@eslint/js";
 import EslintPluginStylistic from "@stylistic/eslint-plugin";
-import TypescriptEslintParser from "@typescript-eslint/parser";
-import * as EslintPluginImport from "eslint-plugin-import";
-var __dirname = "/home/caubut/Documents/projects/effectify/packages/eslint-config/src";
+import * as TypescriptEslintParser from "@typescript-eslint/parser";
 var jsFiles = ["**/*.{js,jsx,cjs,mjs}"];
-var tsFiles = ["**/*.{ts,tsx,cts,mts}"];
-var compat = new FlatCompat({
-  baseDirectory: __dirname
-});
+var tsFiles = ["**/*.{ts,d.ts,tsx,cts,mts}"];
+var compat = new FlatCompat({});
 var common = {
   ignores: [],
   files: [...jsFiles, ...tsFiles],
@@ -24,7 +20,7 @@ var common = {
   settings: {
     "import/parsers": {
       espree: [".js", ".cjs", ".mjs", ".jsx"],
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".d.ts", ".tsx"]
     },
     "import/resolver": {
       typescript: {
@@ -43,35 +39,23 @@ var eslintPluginStylistic = {
   ...EslintPluginStylistic.configs["recommended-flat"],
   ...common
 };
-var eslintPlugImport = [
-  ...[
-    ...compat.config(EslintPluginImport.configs.recommended),
-    ...compat.config(EslintPluginImport.configs.typescript)
-  ].map((config) => ({
-    ...config,
-    ...common
-  }))
-];
+var airbnbBase = compat.extends("eslint-config-airbnb-base").map((config) => ({
+  ...config,
+  ...common
+}));
+var airbnbWhitespace = compat.extends("eslint-config-airbnb-base/whitespace");
 var eslintConfig = [
   eslintRecommended,
   eslintPluginStylistic,
-  ...eslintPlugImport
+  ...airbnbBase
 ];
 var typescript_default = eslintConfig;
 
 // eslint.config.ts
-var __dirname = "/home/caubut/Documents/projects/effectify";
 var ignores = ["eslint.config.js", "packages/*/{build,dist}/**/*"];
 var tsEslintConfig = typescript_default.map((config) => ({
   ...config,
-  ignores,
-  languageOptions: {
-    ...config.languageOptions,
-    parserOptions: {
-      ...config.languageOptions?.parserOptions ?? {},
-      tsconfigRootDir: __dirname
-    }
-  }
+  ignores
 }));
 var eslint_config_default = [
   ...tsEslintConfig

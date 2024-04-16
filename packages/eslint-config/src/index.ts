@@ -1,4 +1,4 @@
 /**
   //     * Custom deprecation rules
   //     */
-export * as typescript from "./typescript.js"
+export * as typescript from './typescript.js';
