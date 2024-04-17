@@ -40,6 +40,7 @@ var eslintPluginStylistic = {
 };
 var compat = {
   extend: (configToExtend) => Effect.gen(function* (_) {
+    console.log(configToExtend);
     const config = yield* _(Effect.tryPromise({ try: () => import(configToExtend), catch: (error) => error }));
     const configs = Array.flatten(yield* _(Effect.all((config.extends ? typeof config.extends === "string" ? [config.extends] : config.extends : []).map(compat.extend))));
     const plugins = yield* _(Effect.all((config.plugins ?? []).map(compat.plugin)).pipe(Effect.map(Record.fromEntries)));
