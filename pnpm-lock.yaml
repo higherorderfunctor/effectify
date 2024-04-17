@@ -58,6 +58,9 @@ importers:
       babel-plugin-annotate-pure-calls:
         specifier: ^0.4.0
         version: 0.4.0(@babel/core@7.24.4)
+      effect:
+        specifier: ^3.0.0
+        version: 3.0.0
       eslint:
         specifier: ^9.0.0
         version: 9.0.0(patch_hash=nkdo6fvakswtf4zd6tx3o76r3u)
@@ -103,6 +106,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.7.0
         version: 7.7.0(eslint@9.0.0)(typescript@5.4.5)
+      effect:
+        specifier: ^3.0.0
+        version: 3.0.0
       eslint:
         specifier: ^9.0.0
         version: 9.0.0(patch_hash=nkdo6fvakswtf4zd6tx3o76r3u)
@@ -1242,6 +1248,10 @@ packages:
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+    dev: true
+
+  /effect@3.0.0:
+    resolution: {integrity: sha512-8yVxuahojpD8Y6ynrvIlSWD2xsea/PyGnjA4V5c7v0fOMJafgsKUNUHErBAr6YoPikmtOfR9zqNWRd9u5QaWEQ==}
     dev: true
 
   /electron-to-chromium@1.4.738:

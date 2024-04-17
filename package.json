@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "rimraf -g ./packages/*/{build,dist} **/.tsbuildinfo",
     "build": "tsc -b tsconfig.build.json && pnpm --recursive --parallel run build",
-    "lint": "pnpm lint-build && eslint",
+    "lint": "pnpm lint-build && eslint --cache",
     "lint-fix": "pnpm lint --fix",
     "lint-build": "bun eslint.build.ts"
   },
@@ -28,6 +28,7 @@
     "@types/node": "^20.12.7",
     "@typescript-eslint/parser": "^7.7.0",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
+    "effect": "^3.0.0",
     "eslint": "^9.0.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^18.0.0",

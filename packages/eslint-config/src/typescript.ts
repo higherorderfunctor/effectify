@@ -2,9 +2,8 @@ import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
 import EslintPluginStylistic from '@stylistic/eslint-plugin'
 import * as TypescriptEslintParser from '@typescript-eslint/parser'
-import { Linter } from 'eslint'
+import { ESLint, Linter  } from 'eslint'
 
-require.main.require.resolve = require.resolve
 // import EslintPluginCodegen, {
 //   processors as EslintPluginCodegenProcessors,
 // } from "eslint-plugin-codegen";
@@ -90,9 +89,9 @@ const jsFiles = ['**/*.{js,jsx,cjs,mjs}']
 const tsFiles = ['**/*.{ts,d.ts,tsx,cts,mts}']
 // const jsonFiles = ["**/*.json", "**/*.json5", "**/*.jsonc"];
 
-const compat = new FlatCompat({
-  // baseDirectory: import.meta.dir,
-})
+// const compat = new FlatCompat({
+//   // baseDirectory: import.meta.dir,
+// })
 
 const common: Linter.FlatConfig = {
   ignores: [],
@@ -131,17 +130,42 @@ const eslintPluginStylistic: Linter.FlatConfig = {
   ...common,
 }
 
-import EslintConfigAirbnbBase from 'eslint-config-airbnb-base';
+// import EslintConfigAirbnbBase from 'eslint-config-airbnb-base';
 
-const airbnbBase: Linter.FlatConfig[] = compat
-  .extends('eslint-config-airbnb-base')
-  .map(config => ({
-    ...config,
-    ...common,
-  }))
+import {Effect, Array, Record} from 'effect';
 
-//const airbnbWhitespace: Linter.FlatConfig[] = compat
-//  .extends('eslint-config-airbnb-base/whitespace')
+const compat = {
+  extend: (configToExtend: string): Effect.Effect<Linter.FlatConfig[], unknown> => Effect.gen(function* (_) {
+    const config: Linter.Config = yield* _(Effect.tryPromise({ try: () => import(configToExtend), catch: (error) => error }));
+    const configs = Array.flatten(yield* _(Effect.all((config.extends ? (typeof config.extends === 'string' ? [config.extends] : config.extends) : []).map(compat.extend))));
+    const plugins = yield* _(Effect.all((config.plugins ?? []).map(compat.plugin)).pipe(Effect.map(Record.fromEntries)));
+    const base: Linter.FlatConfig = {plugins, rules: config.rules ?? {}, ...common  };
+    return [...configs, base];
+  }),
+  plugin: (plugin: string): Effect.Effect<[string, ESLint.Plugin], unknown> =>
+    Effect.tryPromise({ try: () => import(`eslint-plugin-${plugin}`), catch: (error) => error }).pipe(Effect.map((p) => [plugin, p])),
+
+
+}
+
+// TODO: recursive loader with plugins
+// const airbnbBase: Promise<Linter.FlatConfig[]> = Effect.runPromise(Effect.succeed(EslintConfigAirbnbBase.extends ?? []).pipe(
+//   Effect.map((xs) => typeof xs === 'string' ? [xs] : xs),
+//   Effect.tap(Console.log),
+//   Effect.flatMap((xs) => Effect.promise(() => Promise.all(xs.map((x) => import(x) as Promise<Linter.FlatConfig>)))),
+//   Effect.map((xs) => xs.map(({ default: { rules, plugins } }) => ({ rules, plugins, ...common }))),
+//   Effect.tap(Console.log),
+// ));
+
+const airbnbBase: Effect.Effect<Linter.FlatConfig[], unknown> = compat
+  .extend('eslint-config-airbnb-base')
+  // .map(config => ({
+  //   ...config,
+  //   ...common,
+  // }))
+
+const airbnbWhitespace: Effect.Effect<Linter.FlatConfig[], unknown> = compat
+  .extend('eslint-config-airbnb-base/whitespace')
 //  // .map((config) => ({
 //  //   ...config,
 //  //   ...common,
@@ -257,10 +281,13 @@ const airbnbBase: Linter.FlatConfig[] = compat
 //   },
 // ];
 
-const eslintConfig: Linter.FlatConfig[] = [
+const eslintConfig: Promise<Linter.FlatConfig[]> = Effect.runPromise(Effect.all([airbnbBase, airbnbWhitespace]).pipe(
+  Effect.map(Array.flatten),
+  Effect.map(((configs) => [
   eslintRecommended,
   eslintPluginStylistic,
-  ...airbnbBase,
+  ...configs,
+]))));
   // ...airbnbWhitespace,
   /// / ...eslintPluginJsonc,
   /// / ...eslintPluginMarkdown,
@@ -517,6 +544,5 @@ const eslintConfig: Linter.FlatConfig[] = [
   //    "promise/always-return": ["error", { ignoreLastCallback: true }],
   //  },
   // },
-]
 
 export default eslintConfig

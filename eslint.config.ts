@@ -3,7 +3,7 @@ import eslintConfig from './packages/eslint-config/src/typescript.js'
 const ignores = ['eslint.config.js', 'packages/*/{build,dist}/**/*']
 
 
-const tsEslintConfig = eslintConfig.map(config => ({
+const tsEslintConfig = eslintConfig.then(eslintConfig => eslintConfig.map(config => ({
   ...config,
   ignores,
   // languageOptions: {
@@ -13,8 +13,6 @@ const tsEslintConfig = eslintConfig.map(config => ({
   //     tsconfigRootDir: __dirname,
   //   },
   // },
-}))
+})))
 
-export default [
-  ...tsEslintConfig,
-]
+export default tsEslintConfig;
