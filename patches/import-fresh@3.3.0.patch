@@ -1,0 +1,41 @@
+diff --git a/index.js b/index.js
+index 0a4c5d52f6d32274d3032c2c7cf513ac8d1a81af..a96310e7ba855aeac71b3e13b9df0f9ca7eb41e4 100644
+--- a/index.js
++++ b/index.js
+@@ -15,12 +15,12 @@ module.exports = moduleId => {
+
+ 	const oldModule = require.cache[filePath];
+ 	// Delete itself from module parent
+-	if (oldModule && oldModule.parent) {
+-		let i = oldModule.parent.children.length;
++	if (oldModule) {
++		let i = oldModule.children.length;
+
+ 		while (i--) {
+-			if (oldModule.parent.children[i].id === filePath) {
+-				oldModule.parent.children.splice(i, 1);
++			if (oldModule.children[i].id === filePath) {
++				oldModule.children.splice(i, 1);
+ 			}
+ 		}
+ 	}
+@@ -29,5 +29,5 @@ module.exports = moduleId => {
+
+ 	const parent = require.cache[parentPath]; // If `filePath` and `parentPath` are the same, cache will already be deleted so we won't get a memory leak in next step
+
+-	return parent === undefined ? require(filePath) : parent.require(filePath); // In case cache doesn't have parent, fall back to normal require
++	return parent === undefined ? require(filePath) : require.main.require(filePath); // In case cache doesn't have parent, fall back to normal require
+ };
+diff --git a/package.json b/package.json
+index 0c093620687612bce0f46bcc7a6974b1772dc5be..3fb48d62c97f3762eb9df26129de602038e679a6 100644
+--- a/package.json
++++ b/package.json
+@@ -31,7 +31,7 @@
+ 		"bypass"
+ 	],
+ 	"dependencies": {
+-		"parent-module": "^1.0.0",
++		"parent-module": "^3.1.0",
+ 		"resolve-from": "^4.0.0"
+ 	},
+ 	"devDependencies": {

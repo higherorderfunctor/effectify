@@ -1,0 +1,25 @@
+diff --git a/whitespace-async.js b/whitespace-async.js
+index ee7e8b4034ba2c269e50072025559928653430f5..26ee458edd0f6a5b6b63b75c0e8e95b39c4c904e 100755
+--- a/whitespace-async.js
++++ b/whitespace-async.js
+@@ -21,7 +21,6 @@ function getSeverity(ruleConfig) {
+ async function onlyErrorOnRules(rulesToError, config) {
+   const errorsOnly = assign({}, config);
+   const cli = new ESLint({
+-    useEslintrc: false,
+     baseConfig: config
+   });
+   const baseRules = (await cli.calculateConfigForFile(require.resolve('./'))).rules;
+diff --git a/whitespace.js b/whitespace.js
+index e60f7a79186c86265ff6e0beb3e372d3bd9d7f59..dd2075886a43ae644600b4aab8b5b245a6e1caaa 100644
+--- a/whitespace.js
++++ b/whitespace.js
+@@ -23,7 +23,7 @@ if (CLIEngine) {
+ 
+   function onlyErrorOnRules(rulesToError, config) {
+     const errorsOnly = assign({}, config);
+-    const cli = new CLIEngine({ baseConfig: config, useEslintrc: false });
++    const cli = new CLIEngine({ baseConfig: config });
+     const baseRules = cli.getConfigForFile(require.resolve('./')).rules;
+ 
+     entries(baseRules).forEach((rule) => {

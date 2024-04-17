@@ -3,6 +3,8 @@ import js from '@eslint/js'
 import EslintPluginStylistic from '@stylistic/eslint-plugin'
 import * as TypescriptEslintParser from '@typescript-eslint/parser'
 import { Linter } from 'eslint'
+
+require.main.require.resolve = require.resolve
 // import EslintPluginCodegen, {
 //   processors as EslintPluginCodegenProcessors,
 // } from "eslint-plugin-codegen";
@@ -129,6 +131,8 @@ const eslintPluginStylistic: Linter.FlatConfig = {
   ...common,
 }
 
+import EslintConfigAirbnbBase from 'eslint-config-airbnb-base';
+
 const airbnbBase: Linter.FlatConfig[] = compat
   .extends('eslint-config-airbnb-base')
   .map(config => ({
@@ -136,12 +140,12 @@ const airbnbBase: Linter.FlatConfig[] = compat
     ...common,
   }))
 
-const airbnbWhitespace: Linter.FlatConfig[] = compat
-  .extends('eslint-config-airbnb-base/whitespace')
-  // .map((config) => ({
-  //   ...config,
-  //   ...common,
-  // }));
+//const airbnbWhitespace: Linter.FlatConfig[] = compat
+//  .extends('eslint-config-airbnb-base/whitespace')
+//  // .map((config) => ({
+//  //   ...config,
+//  //   ...common,
+//  // }));
 
 // const airbnbTypescriptBase = compat
 //   .extends("eslint-config-airbnb-typescript/base")

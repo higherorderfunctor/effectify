@@ -1,0 +1,10 @@
+diff --git a/bin/eslint.js b/bin/eslint.js
+index b6190f667428e9d304f1a35d7daefea9aa130dfa..836c5695e5ce2a9cc1d1018da594b73a4465e80d 100755
+--- a/bin/eslint.js
++++ b/bin/eslint.js
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env node
++#!/usr/bin/env bun
+ 
+ /**
+  * @fileoverview Main CLI that is run via the eslint command.

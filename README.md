@@ -3,5 +3,6 @@
 ## eslint-config
 
 ```bash
-pnpm --filter @effectify/eslint-conifg
+pnpm i
+pnpm lint
 ```
